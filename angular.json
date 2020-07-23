@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "blog-cms"
+    }
+  },
+  "defaultProject": "blog-cms",
+  "cli": {
+    "analytics": "a0d10572-208c-4ec4-9eb6-b82452d0b994"
+  }
 }
