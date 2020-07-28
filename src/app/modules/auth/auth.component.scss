@@ -1,0 +1,30 @@
+main.login {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: whitesmoke;
+  .input-panel-wrapper {
+    .input-panel-body {
+      height: 16rem;
+      width: 24rem;
+      box-sizing: border-box;
+      .input-panel-header {
+      }
+      .input-panel-content {
+        display: flex;
+        flex-direction: column;
+      }
+      .input-panel-footer {
+        padding: 16px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: flex-end;
+        button {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
