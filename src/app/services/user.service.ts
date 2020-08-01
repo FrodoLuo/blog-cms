@@ -1,6 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { AES, MD5, mode, pad, enc } from 'crypto-js';
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+
+type User = {
+  nickname: string;
+  email: string;
+  type: number;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +16,27 @@ import { AES, MD5, mode, pad, enc } from 'crypto-js';
 export class UserService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
+
+  public user$ = new BehaviorSubject<User>(null);
+
+  public fetchUser() {
+    this.http.get<User>(
+      '/api/users'
+    ).toPromise()
+      .then(
+        res => {
+          this.user$.next(res)
+          return res;
+        },
+        error => {
+          this.user$.next(null)
+          return null;
+        }
+      )
+  }
 
   public requestLogIn(email, password) {
     const randomKey = this.padTo16(Date.now().toString());
@@ -18,16 +45,9 @@ export class UserService {
     formData.append('email', email);
     formData.append('password', cipheredPassword);
     formData.append('key', randomKey);
-    this.http.post(
+    return this.http.post(
       '/api/users',
       formData,
-    ).subscribe(
-      res => {
-        console.log(res);
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error);
-      }
     );
   }
 
