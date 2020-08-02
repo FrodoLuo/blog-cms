@@ -4,7 +4,7 @@ import { AES, MD5, mode, pad, enc } from 'crypto-js';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
-type User = {
+export type User = {
   nickname: string;
   email: string;
   type: number;
@@ -23,24 +23,24 @@ export class UserService {
   public user$ = new BehaviorSubject<User>(null);
 
   public fetchUser() {
-    this.http.get<User>(
+    return this.http.get<User>(
       '/api/users'
     ).toPromise()
       .then(
         res => {
-          this.user$.next(res)
+          this.user$.next(res);
           return res;
         },
         error => {
-          this.user$.next(null)
+          this.user$.next(null);
           return null;
         }
-      )
+      );
   }
 
   public requestLogIn(email, password) {
     const randomKey = this.padTo16(Date.now().toString());
-    const cipheredPassword = this.cipherPassword(password, randomKey)
+    const cipheredPassword = this.cipherPassword(password, randomKey);
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', cipheredPassword);
@@ -53,13 +53,13 @@ export class UserService {
 
   private cipherPassword(origin: string, passphase: string): string {
     const encodedOrigin = enc.Utf8.parse(MD5(origin).toString());
-    const encodedKey = enc.Utf8.parse(passphase)
+    const encodedKey = enc.Utf8.parse(passphase);
     const cipheredPassword = AES.encrypt(encodedOrigin, encodedKey, {
       mode: mode.CBC,
       iv: encodedKey,
       padding: pad.ZeroPadding
     });
-    return enc.Base64.stringify(cipheredPassword.ciphertext)
+    return enc.Base64.stringify(cipheredPassword.ciphertext);
   }
   private padTo16(origin: string): string {
     if (this.padTo16.length > 16) {
@@ -67,7 +67,7 @@ export class UserService {
     } else {
       let result = origin;
       for (let i = 0; i < 16 - origin.length; i++) {
-        result += '0'
+        result += '0';
       }
       return result;
     }

@@ -5,7 +5,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
@@ -17,8 +20,12 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
+    MatListModule,
     MatIconModule,
     MatInputModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatSidenavModule,
   ]
 })
 export class MaterialModule { }

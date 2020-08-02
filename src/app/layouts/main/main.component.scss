@@ -1,0 +1,24 @@
+mat-drawer-container{
+  height: calc(100vh - 64px);
+  mat-drawer {
+    width: 208px;
+    box-shadow: none;
+    border-right: solid 1px #eee;
+    mat-nav-list {
+      a {
+        color: #666;
+        mat-icon {
+          margin-right: 4px;
+        }
+      }
+      a.active {
+
+      }
+    }
+  }
+}
+
+.main-content {
+  padding: 8px;
+  box-sizing: border-box;
+}
