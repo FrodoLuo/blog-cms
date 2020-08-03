@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ArticleListComponent } from './components/article-list/article-list.component';
 import { ArticleRoutingModule } from './article-routing.module';
 import { ArticleEditComponent } from './components/article-edit/article-edit.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -10,7 +11,8 @@ import { ArticleEditComponent } from './components/article-edit/article-edit.com
   declarations: [ArticleListComponent, ArticleEditComponent],
   imports: [
     CommonModule,
-    ArticleRoutingModule
+    ArticleRoutingModule,
+    SharedModule
   ]
 })
 export class ArticleModule { }

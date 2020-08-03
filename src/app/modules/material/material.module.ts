@@ -9,6 +9,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -24,6 +26,8 @@ import { MatListModule } from '@angular/material/list';
     MatIconModule,
     MatInputModule,
     MatMenuModule,
+    MatPaginatorModule,
+    MatTableModule,
     MatToolbarModule,
     MatSidenavModule,
   ]

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ArticleService } from 'src/app/services/article.service';
 
 @Component({
   selector: 'app-article-list',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArticleListComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private articleService: ArticleService
+  ) { }
 
-  ngOnInit(): void {
+  public articles$ = this.articleService.currentPageArticles$;
+
+  public totalCount$ = this.articleService.totalCountOfArticles$;
+
+  public displayedColumns: string[] = ['id', 'title', 'updatedAt', 'createdAt', 'author', 'actions'];
+  
+
+  public ngOnInit(): void {
+    this.articleService.getArticlesByPage();
+  }
+
+  public changePage(page: number) {
+    this.articleService.setPage(page);
   }
 
 }
