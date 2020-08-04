@@ -2,6 +2,10 @@
   <button mat-icon-button>
     <mat-icon>menu</mat-icon>
   </button>
+  <div class="toolbar-content"></div>
+  <div class="user-container">
+    <span>{{(user$ |async).username}}</span>
+  </div>
 </mat-toolbar>
 <mat-drawer-container [hasBackdrop]="false">
   <mat-drawer opened mode="side">

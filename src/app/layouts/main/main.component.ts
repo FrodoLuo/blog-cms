@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
+export class MainComponent {
 
-  constructor() { }
+  constructor(
+    private userService: UserService
+  ) { }
 
-  ngOnInit(): void {
-  }
-
+  public user$ = this.userService.user$;
 }

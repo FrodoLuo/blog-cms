@@ -55,4 +55,10 @@ export class ArticleService {
     ).subscribe(res => this.totalCountOfArticles$.next(res));
   }
 
+  public saveArticle(article: Article) {
+    return this.http.post<Article>(
+      '/api/articles',
+      article
+    );
+  }
 }

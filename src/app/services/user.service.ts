@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 export type User = {
-  nickname: string;
+  username: string;
   email: string;
   type: number;
 }

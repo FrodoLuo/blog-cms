@@ -1,0 +1,35 @@
+.article-form-container {
+  mat-card-title {
+    display: flex;
+
+    mat-form-field {
+      flex: 0.5;
+    }
+  }
+
+  mat-card-content {
+    display: flex;
+    flex-direction: column;
+
+    mat-form-field {
+      width: 100%;
+      textarea {
+        height: 40vh;
+        resize: none;
+        &.small {
+          height: 12vh;
+        }
+      }
+    }
+  }
+}
+
+.btn-container {
+  padding: 4px;
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    margin: 4px;
+  }
+}

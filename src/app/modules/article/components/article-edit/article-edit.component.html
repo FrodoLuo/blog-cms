@@ -1,1 +1,30 @@
-<p>article-edit works!</p>
+<mat-card class="article-form-container">
+  <form action="javascript:void(0)" >
+    <mat-card-title>
+      <mat-form-field appearance="standard" required>
+        <mat-label>Title</mat-label>
+        <input matInput />
+      </mat-form-field>
+    </mat-card-title>
+    <mat-card-content>
+      <mat-form-field appearance="outline">
+        <mat-label>Content</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Brief</mat-label>
+        <textarea matInput class="small"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Tags</mat-label>
+        <input matInput />
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-footer>
+      <div class="btn-container">
+        <button mat-flat-button>Save Draft</button>
+        <button mat-flat-button color="primary">Post</button>
+      </div>
+    </mat-card-footer>
+  </form>
+</mat-card>
