@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from './user.service';
 
 export type Article = {
@@ -27,17 +27,17 @@ export class ArticleService {
     private http: HttpClient
   ) { }
 
-  public setPage(page: number) {
+  public setPage(page: number): void {
     this.currentPage$.next(page);
     this.getArticlesByPage();
   }
 
-  public setKeyword(keyword: string) {
+  public setKeyword(keyword: string): void {
     this.currentKeyword$.next(keyword);
     this.getArticlesByPage();
   }
 
-  public getArticlesByPage() {
+  public getArticlesByPage(): void {
     if (this.currentPage$ == null) return;
     const page = this.currentPage$.getValue().toString();
     this.http.get<Article[]>(
@@ -55,10 +55,16 @@ export class ArticleService {
     ).subscribe(res => this.totalCountOfArticles$.next(res));
   }
 
-  public saveArticle(article: Article) {
+  public saveArticle(article: Article): Observable<Article> {
     return this.http.post<Article>(
       '/api/articles',
       article
+    );
+  }
+  
+  public getArticleDetail(id: number): Observable<Article> {
+    return this.http.get<Article>(
+      `/api/articles/detail/${id}`
     );
   }
 }

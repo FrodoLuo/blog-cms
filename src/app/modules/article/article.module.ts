@@ -11,11 +11,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [ArticleListComponent, ArticleEditComponent],
   imports: [
-    CommonModule,
     ArticleRoutingModule,
-    SharedModule,
+    CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule,
   ]
 })
 export class ArticleModule { }
