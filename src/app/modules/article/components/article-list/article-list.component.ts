@@ -26,5 +26,4 @@ export class ArticleListComponent implements OnInit {
   public changePage(page: number) {
     this.articleService.setPage(page);
   }
-
 }

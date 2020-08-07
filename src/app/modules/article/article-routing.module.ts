@@ -7,7 +7,7 @@ import { ArticleEditComponent } from './components/article-edit/article-edit.com
 const routes: Routes = [
   { path: 'list', component: ArticleListComponent },
   { path: 'new', component: ArticleEditComponent },
-  { path: 'edit', component: ArticleEditComponent },
+  { path: 'edit/:id', component: ArticleEditComponent },
 ];
 
 @NgModule({

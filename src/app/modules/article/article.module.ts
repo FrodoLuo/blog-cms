@@ -4,6 +4,7 @@ import { ArticleListComponent } from './components/article-list/article-list.com
 import { ArticleRoutingModule } from './article-routing.module';
 import { ArticleEditComponent } from './components/article-edit/article-edit.component';
 import { SharedModule } from '../shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -12,7 +13,9 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     ArticleRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ArticleModule { }
