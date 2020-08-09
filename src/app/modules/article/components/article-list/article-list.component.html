@@ -1,6 +1,7 @@
 <mat-card>
   <mat-card-title>Articles</mat-card-title>
   <mat-card-content>
+    <a mat-flat-button color="primary" routerLink="/dashboard/article/new"><mat-icon>add</mat-icon>New</a>
     <table class="article-list-table" mat-table [dataSource]="articles$">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>Id</th>

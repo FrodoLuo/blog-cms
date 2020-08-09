@@ -31,7 +31,6 @@ export class ArticleEditComponent implements OnInit {
   ngOnInit(): void {
     // TODO
     if (this.isEdit()) {
-      console.log(123);
       this.articleService.getArticleDetail(Number.parseInt(this.router.snapshot.params['id']))
         .subscribe(res => {
           this.articleFormGroup.patchValue(res);
@@ -47,6 +46,6 @@ export class ArticleEditComponent implements OnInit {
   }
 
   isEdit(): boolean {
-    return this.router.snapshot.url.toString().match(/edit.*/) !== null;
+    return this.router.snapshot.url[0]?.path === 'edit';
   }
 }

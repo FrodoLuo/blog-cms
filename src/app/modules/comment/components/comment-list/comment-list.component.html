@@ -1,0 +1,39 @@
+<mat-card>
+  <mat-card-title>Comments</mat-card-title>
+  <mat-card-content>
+    <table mat-table class="comment-list-table" [dataSource]="comments$">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let element">{{element.id}}</td>
+      </ng-container>
+      <ng-container matColumnDef="nickname">
+        <th mat-header-cell *matHeaderCellDef>Nickname</th>
+        <td mat-cell *matCellDef="let element">{{element.nickname}}</td>
+      </ng-container>
+      <ng-container matColumnDef="content">
+        <th mat-header-cell *matHeaderCellDef>Content</th>
+        <td mat-cell *matCellDef="let element">{{element.content}}</td>
+      </ng-container>
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef>Created At</th>
+        <td mat-cell *matCellDef="let element">{{element.createdAt | date}}</td>
+      </ng-container>
+      <ng-container matColumnDef="updatedAt">
+        <th mat-header-cell *matHeaderCellDef>Updated At</th>
+        <td mat-cell *matCellDef="let element">{{element.updatedAt | date}}</td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-button>Reply</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-paginator pageSize="10" [length]="totalCount$ | async" (page)="onPageChange($event.pageIndex)"></mat-paginator>
+  </mat-card-footer>
+</mat-card>

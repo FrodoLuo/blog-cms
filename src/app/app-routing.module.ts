@@ -22,6 +22,10 @@ const routes: Routes = [
         loadChildren: () => import('./modules/article/article.module').then(mod => mod.ArticleModule)
       },
       {
+        path: 'comment',
+        loadChildren: () => import('./modules/comment/comment.module').then(mod => mod.CommentModule)
+      },
+      {
         path: 'media',
         loadChildren: () => import('./modules/media/media.module').then(mod => mod.MediaModule)
       }

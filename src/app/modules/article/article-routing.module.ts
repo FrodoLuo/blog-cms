@@ -5,6 +5,7 @@ import { ArticleListComponent } from './components/article-list/article-list.com
 import { ArticleEditComponent } from './components/article-edit/article-edit.component';
 
 const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'list'},
   { path: 'list', component: ArticleListComponent },
   { path: 'new', component: ArticleEditComponent },
   { path: 'edit/:id', component: ArticleEditComponent },
