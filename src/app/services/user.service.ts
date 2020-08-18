@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { AES, MD5, mode, pad, enc } from 'crypto-js';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from "rxjs";
 
 export type User = {
   username: string;
@@ -22,7 +22,7 @@ export class UserService {
 
   public user$ = new BehaviorSubject<User>(null);
 
-  public fetchUser() {
+  public fetchUser(): Promise<User> {
     return this.http.get<User>(
       '/api/users'
     ).toPromise()
@@ -38,7 +38,7 @@ export class UserService {
       );
   }
 
-  public requestLogIn(email, password) {
+  public requestLogIn(email: string, password: string): Observable<unknown> {
     const randomKey = this.padTo16(Date.now().toString());
     const cipheredPassword = this.cipherPassword(password, randomKey);
     const formData = new FormData();

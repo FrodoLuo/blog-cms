@@ -2,6 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from './user.service';
+import { ListContentService } from './list-content.service';
 
 export type Article = {
   title: string;
@@ -16,28 +17,25 @@ export type Article = {
 @Injectable({
   providedIn: 'root'
 })
-export class ArticleService {
-
-  public currentPageArticles$ = new BehaviorSubject<Article[]>([]);
-  public totalCountOfArticles$ = new BehaviorSubject<number>(0);
-  public currentPage$ = new BehaviorSubject<number>(0);
-  public currentKeyword$ = new BehaviorSubject<string>('');
+export class ArticleService extends ListContentService<Article> {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+    super();
+  }
 
   public setPage(page: number): void {
     this.currentPage$.next(page);
-    this.getArticlesByPage();
+    this.fetchDataByPage();
   }
 
   public setKeyword(keyword: string): void {
     this.currentKeyword$.next(keyword);
-    this.getArticlesByPage();
+    this.fetchDataByPage();
   }
 
-  public getArticlesByPage(): void {
+  public fetchDataByPage(): void {
     if (this.currentPage$ == null) return;
     const page = this.currentPage$.getValue().toString();
     this.http.get<Article[]>(
@@ -49,10 +47,10 @@ export class ArticleService {
           keyword: this.currentKeyword$.getValue()
         }
       }
-    ).subscribe(res => this.currentPageArticles$.next(res));
+    ).subscribe(res => this.currentPageList$.next(res));
     this.http.get<number>(
       '/api/articles/count'
-    ).subscribe(res => this.totalCountOfArticles$.next(res));
+    ).subscribe(res => this.totalCount$.next(res));
   }
 
   public saveArticle(article: Article): Observable<Article> {

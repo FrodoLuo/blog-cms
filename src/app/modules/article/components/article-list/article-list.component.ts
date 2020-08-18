@@ -12,18 +12,18 @@ export class ArticleListComponent implements OnInit {
     private articleService: ArticleService
   ) { }
 
-  public articles$ = this.articleService.currentPageArticles$;
+  public articles$ = this.articleService.currentPageList$;
 
-  public totalCount$ = this.articleService.totalCountOfArticles$;
+  public totalCount$ = this.articleService.totalCount$;
 
   public displayedColumns: string[] = ['id', 'title', 'updatedAt', 'createdAt', 'author', 'actions'];
   
 
   public ngOnInit(): void {
-    this.articleService.getArticlesByPage();
+    this.articleService.fetchDataByPage();
   }
 
-  public changePage(page: number) {
+  public changePage(page: number): void {
     this.articleService.setPage(page);
   }
 }

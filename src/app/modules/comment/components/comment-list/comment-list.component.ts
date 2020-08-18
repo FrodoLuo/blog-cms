@@ -12,17 +12,17 @@ export class CommentListComponent implements OnInit {
     private commentService: CommentService
   ) { }
 
-  public comments$ = this.commentService.currentPageComments$;
+  public comments$ = this.commentService.currentPageList$;
 
-  public totalCount$ = this.commentService.totalCountOfComments$;
+  public totalCount$ = this.commentService.totalCount$;
 
   public displayedColumns: string[] = ['id', 'content', 'nickname', 'createdAt', 'actions'];
 
   ngOnInit(): void {
-    this.commentService.fetchComments();
+    this.commentService.fetchDataByPage();
   }
 
-  onPageChange(page: number) {
+  onPageChange(page: number): void {
     this.commentService.setPage(page);
   }
 

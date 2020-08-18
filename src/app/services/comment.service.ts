@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Article } from './article.service';
 import { HttpClient } from '@angular/common/http';
+import { ListContentService } from './list-content.service';
 
 export type Comment = {
   id: number;
@@ -15,17 +16,15 @@ export type Comment = {
 @Injectable({
   providedIn: 'root'
 })
-export class CommentService {
+export class CommentService extends ListContentService<Comment> {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+    super();
+  }
 
-  public currentPageComments$ = new BehaviorSubject<Comment[]>([]);
-  public totalCountOfComments$ = new BehaviorSubject<number>(0);
-  public currentPage$ = new BehaviorSubject<number>(0);
-
-  public fetchComments() {
+  public fetchDataByPage(): void {
     const page = this.currentPage$.getValue().toFixed(0);
     const pageSize = '10';
     this.http.get<Comment[]>(
@@ -36,14 +35,14 @@ export class CommentService {
           pageSize
         }
       }
-    ).subscribe(res => this.currentPageComments$.next(res));
+    ).subscribe(res => this.currentPageList$.next(res));
     this.http.get<number>(
       '/api/comments/count'
-    ).subscribe(res => this.totalCountOfComments$.next(res));
+    ).subscribe(res => this.totalCount$.next(res));
   }
 
-  public setPage(page: number) {
+  public setPage(page: number): void {
     this.currentPage$.next(page);
-    this.fetchComments();
+    this.fetchDataByPage();
   }
 }
