@@ -3,7 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { ListContentService } from './list-content.service';
 
 export type Media = {
-
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  tag: string;
+  description: string;
+  source: string;
+  orderReference: number;
 }
 
 @Injectable({
@@ -21,7 +27,22 @@ export class MediaService extends ListContentService<Media>{
     throw new Error('Method not implemented.');
   }
   public fetchDataByPage(): void {
-    throw new Error('Method not implemented.');
+    this.http.get<Media[]>(
+      '/api/media',
+      {
+        params: {
+          page: this.currentPage$.getValue().toFixed(0),
+          pageSize: '10'
+        }
+      }
+    ).subscribe(
+      res => {
+        this.currentPageList$.next(res);
+      }
+    );
+    this.http.get<number>(
+      '/api/media/count'
+    ).subscribe(r => this.totalCount$.next(r));
   }
   
 }

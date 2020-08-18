@@ -25,6 +25,8 @@ export class ArticleService extends ListContentService<Article> {
     super();
   }
 
+  public currentKeyword$ = new BehaviorSubject<string>('');
+
   public setPage(page: number): void {
     this.currentPage$.next(page);
     this.fetchDataByPage();

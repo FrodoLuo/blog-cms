@@ -1,0 +1,14 @@
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>File</mat-label>
+    <ngx-mat-file-input [formControl]="fileControl"></ngx-mat-file-input>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Tag</mat-label>
+    <input matInput />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button (click)="cancel()">Cancel</button>
+  <button [disabled]="!fileControl.valid" mat-flat-button color="primary" (click)="upload()">Upload</button>
+</mat-dialog-actions>
