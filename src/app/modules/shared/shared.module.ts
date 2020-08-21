@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material/material.module';
+import { NotifyModule } from '../notify/notify.module';
 
 
 
@@ -8,7 +9,8 @@ import { MaterialModule } from '../material/material.module';
   declarations: [],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    NotifyModule
   ],
   exports: [
     MaterialModule

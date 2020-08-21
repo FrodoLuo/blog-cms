@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MediaService } from 'src/app/services/media.service';
+import { MediaService, Media } from 'src/app/services/media.service';
 import { MatDialog } from '@angular/material/dialog';
 import { UploadDialogComponent } from '../upload-dialog/upload-dialog.component';
+import { NotifyService } from 'src/app/modules/notify/notify.service';
 
 @Component({
   selector: 'app-media-list',
@@ -12,7 +13,8 @@ export class MediaListComponent implements OnInit {
 
   constructor(
     private mediaService: MediaService,
-    private dialog: MatDialog
+    private notifyService: NotifyService,
+    private dialog: MatDialog,
   ) { }
 
   public media$ = this.mediaService.currentPageList$;
@@ -36,6 +38,13 @@ export class MediaListComponent implements OnInit {
       disableClose: true,
       autoFocus: false
     });
+  }
+
+  public copyUrl(media: Media) {
+    if (navigator && navigator.clipboard) {
+      navigator.clipboard.writeText(media.source);
+      this.notifyService.info('Copied!');
+    }
   }
 
 }

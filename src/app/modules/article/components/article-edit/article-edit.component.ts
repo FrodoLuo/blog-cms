@@ -48,4 +48,5 @@ export class ArticleEditComponent implements OnInit {
   isEdit(): boolean {
     return this.router.snapshot.url[0]?.path === 'edit';
   }
+
 }
