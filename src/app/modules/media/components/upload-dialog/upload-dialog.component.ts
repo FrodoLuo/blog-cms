@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MediaService } from 'src/app/services/media.service';
 import { MatDialogRef } from '@angular/material/dialog';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { catchError } from 'rxjs/operators';
+import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-upload-dialog',
@@ -15,20 +17,35 @@ export class UploadDialogComponent {
     private dialogRef: MatDialogRef<UploadDialogComponent>
   ) {}
 
-  public fileControl = new FormControl(null, [
-    Validators.required
-  ]);
-  public tagControl = new FormControl('')
+  public uploadForm = new FormGroup({
+    'file': new FormControl(null,
+      [Validators.required]
+    ),
+    'tag': new FormControl(''),
+    'description': new FormControl(''),
+    'orderReference': new FormControl(0)
+  });
+
+  public uploading = false;
 
   public cancel():void {
     this.dialogRef.close();
   }
 
   public upload():void {
-    console.log(this.fileControl.value);
-  }
-
-  public selectFile(event):void {
-    console.dir(event);
+    this.uploading = true;
+    const data = this.uploadForm.getRawValue();
+    this.mediaService.postMedia(data)
+      .pipe(
+        catchError((err, caught) => {
+          this.uploading = false;
+          console.error(err);
+          return empty();
+        })
+      )
+      .subscribe(res => {
+        this.mediaService.fetchDataByPage();
+        this.uploading = false;
+      });
   }
 }

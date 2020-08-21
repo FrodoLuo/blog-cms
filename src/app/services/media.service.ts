@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ListContentService } from './list-content.service';
+import { fileURLToPath } from 'url';
+import { Observable } from 'rxjs';
 
 export type Media = {
   id: number;
@@ -24,7 +26,8 @@ export class MediaService extends ListContentService<Media>{
   }
 
   public setPage(page: number): void {
-    throw new Error('Method not implemented.');
+    this.currentPage$.next(page);
+    this.fetchDataByPage();
   }
   public fetchDataByPage(): void {
     this.http.get<Media[]>(
@@ -44,5 +47,17 @@ export class MediaService extends ListContentService<Media>{
       '/api/media/count'
     ).subscribe(r => this.totalCount$.next(r));
   }
-  
+
+  public postMedia(data: any): Observable<Media> {
+    const formData = new FormData();
+    formData.append('file', data.file.files[0]);
+    formData.append('tag', data.tag);
+    formData.append('description', data.description);
+    formData.append('orderReference', data.orderReference);
+
+    return this.http.post<Media>(
+      '/api/media',
+      formData
+    );
+  }
 }

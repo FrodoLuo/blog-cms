@@ -1,4 +1,8 @@
-mat-dialog-content {
+.form {
+  width: 480px;
   display: flex;
   flex-direction: column;
+  .file-form {
+    display: flex;
+  }
 }

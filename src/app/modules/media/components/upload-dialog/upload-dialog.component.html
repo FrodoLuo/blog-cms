@@ -1,14 +1,26 @@
 <mat-dialog-content>
-  <mat-form-field>
-    <mat-label>File</mat-label>
-    <ngx-mat-file-input [formControl]="fileControl"></ngx-mat-file-input>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Tag</mat-label>
-    <input matInput />
-  </mat-form-field>
+  <form [formGroup]="uploadForm" class="form" action="javascript:void(0)">
+    <mat-form-field>
+      <mat-icon>folder_open</mat-icon>
+      <ngx-mat-file-input class="file-form" formControlName="file"></ngx-mat-file-input>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Tag</mat-label>
+      <input matInput formControlName="tag" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Decription</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Order Reference</mat-label>
+      <input matInput formControlName="orderReference" type="number" />
+    </mat-form-field>
+  </form>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-flat-button (click)="cancel()">Cancel</button>
-  <button [disabled]="!fileControl.valid" mat-flat-button color="primary" (click)="upload()">Upload</button>
+  <button [disabled]="!uploadForm.valid || uploading" mat-flat-button color="primary" (click)="upload()">
+    Upload
+  </button>
 </mat-dialog-actions>
