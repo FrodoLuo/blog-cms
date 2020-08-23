@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { catchError } from 'rxjs/operators';
 import { empty } from 'rxjs';
+import { NotifyService } from 'src/app/modules/notify/notify.service';
 
 @Component({
   selector: 'app-upload-dialog',
@@ -14,6 +15,7 @@ export class UploadDialogComponent {
 
   constructor(
     private mediaService: MediaService,
+    private notifyService: NotifyService,
     private dialogRef: MatDialogRef<UploadDialogComponent>
   ) {}
 
@@ -40,12 +42,15 @@ export class UploadDialogComponent {
         catchError((err, caught) => {
           this.uploading = false;
           console.error(err);
+          this.notifyService.info('Upload failed');
           return empty();
         })
       )
       .subscribe(res => {
+        this.notifyService.info('Uploaded');
         this.mediaService.fetchDataByPage();
         this.uploading = false;
+        this.dialogRef.close();
       });
   }
 }

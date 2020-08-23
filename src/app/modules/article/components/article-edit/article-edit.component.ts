@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ArticleService } from '../../../../services/article.service';
 import { ActivatedRoute } from '@angular/router';
+import { NotifyService } from 'src/app/modules/notify/notify.service';
 
 @Component({
   selector: 'app-article-edit',
@@ -12,6 +13,7 @@ export class ArticleEditComponent implements OnInit {
 
   constructor(
     private articleService: ArticleService,
+    private notifyService: NotifyService,
     private router: ActivatedRoute
   ) {}
 
@@ -40,8 +42,8 @@ export class ArticleEditComponent implements OnInit {
 
   onSubmit(): void {
     this.articleService.saveArticle(this.articleFormGroup.getRawValue())
-      .subscribe(res => {
-        console.log(res);
+      .subscribe(() => {
+        this.notifyService.info('Article Saved.');
       });
   }
 
