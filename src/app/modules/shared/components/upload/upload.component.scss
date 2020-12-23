@@ -1,0 +1,37 @@
+.upload {
+  position: relative;
+  display: flex;
+  border: 1px solid lightgray;
+  height: 180px;
+  width: 260px;
+  margin: 12px 0;
+  border-radius: 5px;
+  .file-input {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    img {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .placeholder-icon {
+    pointer-events: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: lightgray;
+    mat-icon {
+      $size: 56px;
+      font-size: $size;
+      height: $size;
+      width: $size;
+    }
+  }
+}

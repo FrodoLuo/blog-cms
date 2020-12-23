@@ -5,7 +5,6 @@ import { MediaListComponent } from './components/media-list/media-list.component
 import { SharedModule } from '../shared/shared.module';
 import { UploadDialogComponent } from './components/upload-dialog/upload-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 
 @NgModule({
@@ -16,7 +15,6 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialFileInputModule
   ]
 })
 export class MediaModule { }

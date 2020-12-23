@@ -49,15 +49,20 @@ export class MediaService extends ListContentService<Media>{
   }
 
   public postMedia(data: any): Observable<Media> {
+    return this.uploadMedia(data.file.files[0], data.tag, data.description, data.orderReference);
+  }
+
+  public uploadMedia(file: File, tag: string, description: string, orderReference: string): Observable<Media> {
     const formData = new FormData();
-    formData.append('file', data.file.files[0]);
-    formData.append('tag', data.tag);
-    formData.append('description', data.description);
-    formData.append('orderReference', data.orderReference);
+    formData.append('file', file);
+    formData.append('tag', tag);
+    formData.append('description', description);
+    formData.append('orderReference', orderReference);
 
     return this.http.post<Media>(
       '/api/media',
       formData
     );
   }
+
 }

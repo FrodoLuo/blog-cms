@@ -2,18 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material/material.module';
 import { NotifyModule } from '../notify/notify.module';
-
-
+import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { UploadComponent } from './components/upload/upload.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [UploadComponent],
   imports: [
     CommonModule,
     MaterialModule,
-    NotifyModule
+    MaterialFileInputModule,
+    NotifyModule,
   ],
   exports: [
-    MaterialModule
+    UploadComponent,
+    MaterialModule,
+    MaterialFileInputModule,
   ]
 })
 export class SharedModule { }

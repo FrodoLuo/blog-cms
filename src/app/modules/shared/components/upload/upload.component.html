@@ -1,0 +1,8 @@
+<div class="upload">
+  <div class="file-input" (click)="chooseFile()">
+    <img [src]="control.value" *ngIf="control.value" />
+  </div>
+  <div class="placeholder-icon" *ngIf="!control.value">
+    <mat-icon>add</mat-icon>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 <mat-card class="article-form-container">
-  <form action="javascript:void(0)" (submit)="onSubmit()" [formGroup]="articleFormGroup" >
+  <form action="javascript:void(0)" (submit)="onSubmit()" [formGroup]="articleFormGroup">
     <mat-card-title>
       <mat-form-field appearance="standard">
         <mat-label>Title</mat-label>
@@ -8,14 +8,10 @@
       </mat-form-field>
     </mat-card-title>
     <mat-card-content>
-      <p>
-        <mat-slide-toggle (change)="showPreview=$event.checked">Show Preview</mat-slide-toggle>
-      </p>
-      <mat-form-field appearance="outline">
-        <mat-label>Content</mat-label>
-        <textarea matInput formControlName="content" [hidden]="showPreview"></textarea>
-        <article [hidden]="!showPreview">{{articleFormGroup.get('content').value}}</article>
-      </mat-form-field>
+      <div class="article-cover">
+        <app-upload [control]="coverControl"></app-upload>
+      </div>
+      <app-integrated-editor [control]="contentControl" [formGroup]="articleFormGroup"></app-integrated-editor>
       <mat-form-field appearance="outline">
         <mat-label>Brief</mat-label>
         <textarea matInput class="small" formControlName="brief"></textarea>
