@@ -46,10 +46,14 @@ export class ArticleEditComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.articleService.saveArticle(this.articleFormGroup.getRawValue())
-      .subscribe(() => {
-        this.notifyService.info('Article Saved.');
-      });
+    if (this.articleFormGroup.valid) {
+      this.articleService.saveArticle(this.articleFormGroup.getRawValue())
+        .subscribe(() => {
+          this.notifyService.info('Article Saved.');
+        });
+    } else {
+      this.notifyService.info('Form Not Completed');
+    }
   }
 
   isEdit(): boolean {

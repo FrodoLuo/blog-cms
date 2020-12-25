@@ -26,6 +26,10 @@ const routes: Routes = [
         loadChildren: () => import('./modules/comment/comment.module').then(mod => mod.CommentModule)
       },
       {
+        path: 'config',
+        loadChildren: () => import('./modules/config/config.module').then(mod => mod.ConfigModule)
+      },
+      {
         path: 'media',
         loadChildren: () => import('./modules/media/media.module').then(mod => mod.MediaModule)
       }

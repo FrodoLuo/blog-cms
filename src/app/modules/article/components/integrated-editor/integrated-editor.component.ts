@@ -20,9 +20,13 @@ export class IntegratedEditorComponent implements AfterViewInit {
   @ViewChild('editorContainer')
   public editorContainer: ElementRef<HTMLDivElement>;
 
+  private initialized = false;
+
   public ngAfterViewInit(): void {
     const editor = new Editor({
+      initialValue: this.control.value,
       el: this.editorContainer.nativeElement,
+      hideModeSwitch: true,
       initialEditType: 'markdown',
       previewStyle: 'vertical',
     });
@@ -33,5 +37,12 @@ export class IntegratedEditorComponent implements AfterViewInit {
         });
     });
     editor.on('change', () => {this.control.setValue(editor.getMarkdown());});
+
+    this.control.registerOnChange((value) => {
+      if (!this.initialized) {
+        editor.setMarkdown(value);
+        this.initialized = true;
+      }
+    });
   }
 }
