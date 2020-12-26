@@ -1,11 +1,15 @@
 .upload {
   position: relative;
   display: flex;
-  border: 1px solid lightgray;
+  border: 2px solid lightgray;
   height: 180px;
   width: 260px;
   margin: 12px 0;
   border-radius: 5px;
+  transition: border ease 0.3s;
+  &:hover {
+    border-color: black;
+  }
   .file-input {
     height: 100%;
     width: 100%;

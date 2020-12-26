@@ -10,12 +10,11 @@ import { MediaService } from 'src/app/services/media.service';
 })
 export class UploadComponent implements OnInit {
 
-  private i = document.createElement('input');
-
   @Input()
   public control: FormControl;
-
   public uploading = false;
+
+  private i = document.createElement('input');
 
   constructor(
     private mediaService: MediaService

@@ -1,0 +1,23 @@
+<mat-dialog-content>
+  <form [formGroup]="configForm" class="form">
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <textarea matInput formControlName="data"></textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="accent" (click)="close()">Cancel</button>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="submit()"
+    [disabled]="!configForm.valid"
+  >
+    Save
+  </button>
+</mat-dialog-actions>
