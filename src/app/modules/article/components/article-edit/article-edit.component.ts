@@ -7,27 +7,25 @@ import { ArticleService } from 'src/app/services/article.service';
 @Component({
   selector: 'app-article-edit',
   templateUrl: './article-edit.component.html',
-  styleUrls: ['./article-edit.component.scss']
+  styleUrls: ['./article-edit.component.scss'],
 })
 export class ArticleEditComponent implements OnInit {
-
   constructor(
     private articleService: ArticleService,
     private notifyService: NotifyService,
     private router: ActivatedRoute
   ) {}
 
-
   public articleFormGroup = new FormGroup({
     title: new FormControl('', {
-      validators: [Validators.required]
+      validators: [Validators.required],
     }),
     content: new FormControl(''),
     cover: new FormControl(''),
     brief: new FormControl(''),
     tags: new FormControl(''),
     id: new FormControl(0),
-    authorId: new FormControl(0)
+    authorId: new FormControl(0),
   });
 
   public contentControl = this.articleFormGroup.controls['content'];
@@ -38,8 +36,9 @@ export class ArticleEditComponent implements OnInit {
   ngOnInit(): void {
     // TODO
     if (this.isEdit()) {
-      this.articleService.getArticleDetail(Number.parseInt(this.router.snapshot.params['id']))
-        .subscribe(res => {
+      this.articleService
+        .getArticleDetail(Number.parseInt(this.router.snapshot.params['id']))
+        .subscribe((res) => {
           this.articleFormGroup.patchValue(res);
         });
     }
@@ -47,7 +46,8 @@ export class ArticleEditComponent implements OnInit {
 
   onSubmit(): void {
     if (this.articleFormGroup.valid) {
-      this.articleService.saveArticle(this.articleFormGroup.getRawValue())
+      this.articleService
+        .saveArticle(this.articleFormGroup.getRawValue())
         .subscribe(() => {
           this.notifyService.info('Article Saved.');
         });
@@ -59,5 +59,4 @@ export class ArticleEditComponent implements OnInit {
   isEdit(): boolean {
     return this.router.snapshot.url[0]?.path === 'edit';
   }
-
 }

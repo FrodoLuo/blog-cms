@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import Editor from '@toast-ui/editor';
 import { MediaService } from 'src/app/services/media.service';
@@ -6,13 +12,10 @@ import { MediaService } from 'src/app/services/media.service';
 @Component({
   selector: 'app-integrated-editor',
   templateUrl: './integrated-editor.component.html',
-  styleUrls: ['./integrated-editor.component.scss']
+  styleUrls: ['./integrated-editor.component.scss'],
 })
 export class IntegratedEditorComponent implements AfterViewInit {
-
-  public constructor(
-    private mediaService: MediaService
-  ) {}
+  public constructor(private mediaService: MediaService) {}
 
   @Input()
   public control: FormControl;
@@ -31,17 +34,23 @@ export class IntegratedEditorComponent implements AfterViewInit {
       previewStyle: 'vertical',
     });
     editor.addHook('addImageBlobHook', (file: File, callback) => {
-      this.mediaService.uploadMedia(file, 'article', '', '0')
-        .subscribe(res => {
+      this.mediaService
+        .uploadMedia(file, 'article', '', '0')
+        .subscribe((res) => {
           callback(res.source);
         });
     });
-    editor.on('change', () => {this.control.setValue(editor.getMarkdown());});
+    editor.on('change', () => {
+      const markdown = editor.getMarkdown();
+      if (markdown.length > 0) {
+        this.initialized = true;
+      }
+      this.control.setValue(editor.getMarkdown());
+    });
 
     this.control.registerOnChange((value) => {
       if (!this.initialized) {
         editor.setMarkdown(value);
-        this.initialized = true;
       }
     });
   }
